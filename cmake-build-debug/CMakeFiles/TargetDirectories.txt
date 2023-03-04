@@ -1,3 +1,0 @@
-/Users/stu/CLionProjects/gol_refactored/game_of_life/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/stu/CLionProjects/gol_refactored/game_of_life/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/stu/CLionProjects/gol_refactored/game_of_life/cmake-build-debug/CMakeFiles/game_of_life.dir
