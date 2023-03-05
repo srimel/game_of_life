@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Board.h"
 #include "Cell.h"
+#include "Application.h"
 
 /*
                         Game of Life rule set
@@ -97,7 +98,7 @@ void Board::printHorizontalLine() const {
 void Board::setupBoard() {
     char response = 'n';
     int x = 0, y = 0;
-    clearScreen();
+    Application::clearScreen();
     do {
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
         printBoard();
@@ -107,12 +108,12 @@ void Board::setupBoard() {
         cin >> y;
         setState(x,y,true);
         cin.ignore(100, '\n');
-        clearScreen();
+        Application::clearScreen();
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
         printBoard();
         cout <<"Would you like to enter another cell? (y/n): ";
         cin >> response;
-        clearScreen();
+        Application::clearScreen();
     }while( tolower(response) != 'n');
     cout <<"Initial State of Board:\n" <<endl;
     printBoard();
@@ -305,7 +306,7 @@ void Board::autoNextGen() {
         nextGen();
         printBoard();
         usleep(500000); // need micro-sec?
-        clearScreen();
+        Application::clearScreen();
     }
 }
 

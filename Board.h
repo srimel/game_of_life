@@ -1,3 +1,6 @@
+#ifndef _BOARD_H_
+#define _BOARD_H_
+
 #include <string>
 #include <fstream>
 #include "Cell.h"
@@ -34,4 +37,4 @@ private:
 
 };
 
-void clearScreen();
+#endif
