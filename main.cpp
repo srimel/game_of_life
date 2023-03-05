@@ -1,4 +1,5 @@
-#include "gol.h"
+#include "Board.h"
+#include <iostream>
 
 // This program is a simulation of Conway's game of life.
 // TODO: Need to figure out a way to stop the auto generation when the board fails to change state after x generations
