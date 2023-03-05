@@ -1,5 +1,7 @@
 #include <unistd.h>
-#include "gol.h"
+#include <iostream>
+#include "Board.h"
+#include "Cell.h"
 
 /*
                         Game of Life rule set
@@ -55,7 +57,7 @@ void Board::setState(int r, int c, bool x) {
 }
 
 // Doesn't really work that well. Have trouble representing the grid with spacing issues.
-void Board::printColNum() {
+void Board::printColNum() const {
     cout <<"   |";
     for(int j {0}; j < col; ++j) {
         if(j < 10)
@@ -318,23 +320,13 @@ bool Board::isZero() {
     return true;
 }
 
+// TODO: use this for stopping auto generate when board doesn't change on update
 bool Board::operator==(Cell ** other_board) {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            //if (board[i][j] != other_board[i][j]) { return false; } //TODO: overload != operator for Cell class
+            // TODO: overload != operator for Cell class
+            //if (board[i][j] != other_board[i][j]) { return false; }
         };
     }
-    return false;
-}
-
-
-Cell::Cell() {
-    neighbors = 0;
-    state = false;
-}
-
-bool Cell::isAlive() const {
-    if(state)
-        return true;
     return false;
 }

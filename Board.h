@@ -1,23 +1,10 @@
-#include <iostream>
 #include <string>
 #include <fstream>
-
+#include "Cell.h"
 
 // Default size of game board
 #define ROW 10
 #define COL 20
-
-class Cell {
-public:
-    Cell();
-    bool isAlive() const;
-    void setNeighbors(int x) {neighbors = x;}
-    void setLife(bool x) {state = x;}
-    int getNeighbors() const {return neighbors;}
-private:
-    int neighbors; // represents cells adjacent to this one that are alive.
-    bool state;
-};
 
 class Board {
 public:
@@ -41,7 +28,7 @@ private:
     int row, col;
     void printHorizontalLine() const;
     void setState(int row, int col, bool x);
-    void printColNum();
+    void printColNum() const;
     void updateNeighbors();
     Cell ** getNextGen();
 
