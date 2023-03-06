@@ -6,6 +6,6 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(game_of_life
-        Board.cpp
-        Board.h
-        main.cpp Cell.cpp Cell.h Application.cpp Application.h)
+        src/Board.cpp
+        src/Board.h
+        src/main.cpp src/Cell.cpp src/Cell.h src/Application.cpp src/Application.h)
