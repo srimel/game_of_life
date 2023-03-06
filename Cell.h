@@ -4,9 +4,9 @@
 class Cell {
 public:
     Cell();
-    void setNeighbors(int x) {neighbors = x;}
-    int getNeighbors() const {return neighbors;}
-    void setLife(bool x) {state = x;}
+    void setNeighbors(int x);
+    int getNeighbors() const;
+    void setLife(bool x);
     bool isAlive() const;
 private:
     int neighbors; // represents cells adjacent to this one that are alive.
