@@ -39,6 +39,9 @@ Board::Board(const Board & src) {
     board = new Cell * [row];
     for(int i = 0; i < row; i++) {
         board[i] = new Cell[col];
+        for(int j = 0; j < col; ++j) {
+            board[i][j].setLife(src.board[i][j].isAlive());
+        }
     }
 }
 
