@@ -81,3 +81,7 @@ void Application::autoNextGen() {
     _board.autoNextGen(); // will run 30 times (hardcoded)
 }
 
+void Application::exitApplication() {
+    cout << "Goodbye!" << endl;
+}
+
