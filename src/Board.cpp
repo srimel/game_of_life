@@ -4,24 +4,6 @@
 #include "Cell.h"
 #include "Application.h"
 
-/*
-                        Game of Life rule set
-
-1. Births: Each dead cell adjacent to exactly three live neighbors will become
-   live in the next generation.
-
-2. Death by isolation: Each live cell with one or fewer live neighbors will die
-   in the next generation.
-
-3. Death by overcrowding: Each live cell with four or more live neighbors will
-   die in the next generation.
-
-4. Survival: Each live cell with either two or three live neighbors will remain
-   alive for the next generation.
-
-Apply rules to all cells at the same time.
-*/
-
 using std::cout;
 using std::endl;
 using std::cin;
@@ -39,6 +21,9 @@ Board::Board(const Board & src) {
     board = new Cell * [row];
     for(int i = 0; i < row; i++) {
         board[i] = new Cell[col];
+        for(int j = 0; j < col; ++j) {
+            board[i][j].setLife(src.board[i][j].isAlive());
+        }
     }
 }
 
@@ -57,7 +42,6 @@ void Board::setState(int r, int c, bool x) {
 	board[r][c].setLife(x);
 }
 
-// Doesn't really work that well. Have trouble representing the grid with spacing issues.
 void Board::printColNum() const {
     cout <<"   |";
     for(int j {0}; j < col; ++j) {
@@ -88,7 +72,7 @@ void Board::printBoard() {
 }
 
 void Board::printHorizontalLine() const {
-    cout  <<"   "; // offest space accounts for numbering of each row.
+    cout  <<"   "; // offset space accounts for numbering of each row.
 	for(int q {0}; q < ((col * 4) + 1); q++) {
 		cout <<'-';
 	}
@@ -120,10 +104,10 @@ void Board::setupBoard() {
     updateNeighbors();
 }
 
-// Able to load special configuration files where each line in external file is a 2-pair tuple indicating row and column
-// position separated by a comma and each tuple sepated by a newline (e.g. 2,4
-bool Board::loadConfig(std::string fileName) {   //                        3,6
-    std::ifstream fin;                           //                        7,8)
+// Able to load special configuration files where each line in external file is a 2-pair tuple
+// indicating row and column position separated by a comma and each tuple separated by a newline.
+bool Board::loadConfig(const std::string& fileName) {
+    std::ifstream fin;
     fin.open(fileName);
     if(!fin) {
         std::cerr <<"File could not be opened" <<endl;
@@ -137,7 +121,6 @@ bool Board::loadConfig(std::string fileName) {   //                        3,6
             fin.ignore(100,',');
             fin >> y;
             fin.ignore(100,'\n');
-            cout <<"X: " <<x <<" Y: " <<y <<endl;
             setState(x, y, true);
         }
         fin.close();
@@ -146,7 +129,7 @@ bool Board::loadConfig(std::string fileName) {   //                        3,6
     }
 }
 
-bool Board::saveBoard(std::string fileName) {
+bool Board::saveBoard(const std::string& fileName) {
     std::ofstream fout;
     fout.open(fileName);
     if(!fout) {
@@ -165,7 +148,7 @@ bool Board::saveBoard(std::string fileName) {
     }
 }
 
-bool Board::loadBoard(std::string fileName) {
+bool Board::loadBoard(const std::string& fileName) {
     std::ifstream fin;
     fin.open(fileName);
     if(!fin) {
@@ -188,7 +171,6 @@ bool Board::loadBoard(std::string fileName) {
     }
 }
 
-// Prompts user to draw on board and then save the board to external file.
 void Board::draw() {
     char response;
     do {
@@ -218,12 +200,6 @@ void Board::reset() {
     }
 }
 
-/* Rules for surviving the next generation;
- * 1. Any live cell with two or three live neighbours survives.
- * 2. Any dead cell with three live neighbours becomes a live cell.
- * 3. All other live cells die in the next generation. Similarly, all other dead cells stay dead.
- */
-// Wrapper function for getting the next generation of cell states
 void Board::nextGen() {
     // board containing next generation
     Cell ** hold = getNextGen();
@@ -311,7 +287,6 @@ void Board::autoNextGen() {
 }
 
 bool Board::isZero() {
-    int result = 0;
     for(int i = 0; i < ROW; i++) {
         for(int j = 0; j < COL; j++) {
            if(board[i][j].isAlive())
@@ -321,13 +296,13 @@ bool Board::isZero() {
     return true;
 }
 
-// TODO: use this for stopping auto generate when board doesn't change on update
-bool Board::operator==(Cell ** other_board) {
+bool Board::operator==(Cell ** other_board) const {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            // TODO: overload != operator for Cell class
-            //if (board[i][j] != other_board[i][j]) { return false; }
+            if (board[i][j].isAlive() != other_board[i][j].isAlive()) {
+                return false;
+            }
         };
     }
-    return false;
+    return true;
 }

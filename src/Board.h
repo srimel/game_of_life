@@ -5,7 +5,6 @@
 #include <fstream>
 #include "Cell.h"
 
-// Default size of game board
 #define ROW 10
 #define COL 20
 
@@ -17,14 +16,14 @@ public:
     void reset();
     void nextGen();
     void autoNextGen();
-    void setupBoard(); // prompts user to set up the game.
-    void draw(); // saves board states
+    void setupBoard();
+    void draw();
     void printBoard();
-    bool loadBoard(std::string fileName);
-    bool loadConfig(std::string fileName);
-    bool saveBoard(std::string fileName);
+    bool loadBoard(const std::string& fileName);
+    bool loadConfig(const std::string& fileName);
+    bool saveBoard(const std::string& fileName);
     bool isZero();
-    bool operator==(Cell **);
+    bool operator==(Cell **) const;
 
 private:
     Cell ** board;
