@@ -9,35 +9,25 @@ using std::endl;
 void Application::runApplication()
 {
     char resp;
+
+    void (Application::*menuFunctions[])() = {
+            &Application::exitApplication,
+            &Application::drawBoard,
+            &Application::loadBlinkerBoard,
+            &Application::resetBoard,
+            &Application::generateNextGen,
+            &Application::autoNextGen
+    };
+
+    int totalMenuOptions = sizeof(menuFunctions) / sizeof(menuFunctions[0]);
+
     do {
         resp = getUserInput();
-        switch (resp) {
-            case '0':
-                cout << "\n\nGoodbye!\n" << endl;
-                break;
-            case '1':
-               _board.draw();
-                break;
-            case '2': {
-                if (_board.loadBoard("blinker_plus")) {
-                    _board.printBoard();
-                } else {
-                    std::cerr << "Error: loading file failed for blinker_board.txt" << endl;
-                }
-                break;
-            }
-            case '3':
-                _board.reset();
-                break;
-            case '4':
-                _board.nextGen();
-                break;
-            case '5':
-                _board.autoNextGen(); // will run 30 times (hardcoded)
-                break;
-            default:
-                cout << "Shouldn't be hitting the default menu case..." << endl;
-                break;
+        int index = resp - '0'; // Convert char to integer index
+        if (index >= 0 && index <= totalMenuOptions && menuFunctions[index]) {
+            (this->*menuFunctions[index])();
+        } else {
+            cout << "Invalid menu option" << endl;
         }
     }while(resp != '0');
 }
@@ -65,5 +55,29 @@ char Application::promptBoardMenu() {
     cin >> resp;
     cin.ignore(100, '\n');
     return resp;
+}
+
+void Application::drawBoard() {
+    _board.draw();
+}
+
+void Application::loadBlinkerBoard() {
+    if (_board.loadBoard("blinker_plus")) {
+        _board.printBoard();
+    } else {
+        std::cerr << "Error: loading file failed for blinker_board.txt" << endl;
+    }
+}
+
+void Application::resetBoard() {
+    _board.reset();
+}
+
+void Application::generateNextGen() {
+    _board.nextGen();
+}
+
+void Application::autoNextGen() {
+    _board.autoNextGen(); // will run 30 times (hardcoded)
 }
 
