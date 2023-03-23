@@ -62,7 +62,7 @@ void Application::drawBoard() {
 }
 
 void Application::loadBlinkerBoard() {
-    if (_board.loadBoard("blinker_plus")) {
+    if (_board.loadBoard("../boards/blinker_plus")) {
         _board.printBoard();
     } else {
         std::cerr << "Error: loading file failed for blinker_board.txt" << endl;
