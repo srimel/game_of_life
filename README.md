@@ -1,7 +1,7 @@
 # Conway's Game of Life
 
 ### Overview
-Console implementation of Conway's Game of Life created using C++.
+Console implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) created using C++.
 
 ---
 ### Build and Run Instructions (Unix/Linux)
@@ -13,18 +13,19 @@ Console implementation of Conway's Game of Life created using C++.
 
 ---
 ### Game of Life Rule Set
-1. Births: Each dead cell adjacent to exactly three live neighbors will become
+- Births: Each dead cell adjacent to exactly three live neighbors will become
    live in the next generation.
-2. Death by isolation: Each live cell with one or fewer live neighbors will die
+- Death by isolation: Each live cell with one or fewer live neighbors will die
    in the next generation.
-3. Death by overcrowding: Each live cell with four or more live neighbors will
+- Death by overcrowding: Each live cell with four or more live neighbors will
    die in the next generation.
-4. Survival: Each live cell with either two or three live neighbors will remain
+- Survival: Each live cell with either two or three live neighbors will remain
    alive for the next generation.
-5. Apply rules to all cells at the same time.
+- Apply rules to all cells at the same time.
 
 ---
-### Example Screen
+### Sample Screen
+
 ```
    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11| 12| 13| 14| 15| 16| 17| 18| 19|
    ---------------------------------------------------------------------------------
