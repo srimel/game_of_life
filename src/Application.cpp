@@ -15,6 +15,7 @@ void Application::runApplication()
             &Application::drawBoard,
             &Application::loadBlinkerBoard,
             &Application::loadBoard,
+            &Application::saveBoard,
             &Application::resetBoard,
             &Application::generateNextGen,
             &Application::autoNextGen
@@ -56,6 +57,7 @@ char Application::promptBoardMenu() {
         "Draw",
         "Load Blinker+",
         "Load Board",
+        "Save Board",
         "Reset",
         "Next",
         "Auto-Run"
@@ -88,8 +90,7 @@ void Application::loadBlinkerBoard() {
 void Application::loadBoard() {
     std::string response;
     cout << "Enter a board to load: ";
-    cin >> response;
-    cin.ignore(100, '\n');
+    getline(cin, response);
     if (!_board.loadBoard(response)) {
         std::cerr << response << " not loaded" << endl;
     }
@@ -109,5 +110,14 @@ void Application::autoNextGen() {
 
 void Application::exitApplication() {
     cout << "Goodbye!" << endl;
+}
+
+void Application::saveBoard() {
+    std::string response;
+    cout << "Enter a file name for this board: ";
+    getline(cin, response);
+    if (!_board.saveBoard(response)) {
+        std::cerr << response << " not saved" << endl;
+    }
 }
 

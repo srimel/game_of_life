@@ -131,7 +131,8 @@ bool Board::loadConfig(const std::string& fileName) {
 
 bool Board::saveBoard(const std::string& fileName) {
     std::ofstream fout;
-    fout.open(fileName);
+    std::string path = "../boards/" + fileName;
+    fout.open(path);
     if(!fout) {
         std::cerr <<"Error opening save file:" << fileName <<endl;
         return false;

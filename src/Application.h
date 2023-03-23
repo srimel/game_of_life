@@ -18,6 +18,7 @@ private:
     void autoNextGen();
     void exitApplication();
     void loadBoard();
+    void saveBoard();
 };
 
 #endif //GAME_OF_LIFE_APPLICATION_H
