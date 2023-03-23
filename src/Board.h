@@ -17,8 +17,8 @@ public:
     void reset();
     void nextGen();
     void autoNextGen();
-    void setupBoard(); // prompts user to set up the game.
-    void draw(); // saves board states
+    void setupBoard();
+    void draw();
     void printBoard();
     bool loadBoard(std::string fileName);
     bool loadConfig(std::string fileName);
