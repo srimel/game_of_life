@@ -9,7 +9,7 @@ public:
 private:
     Board _board;
 
-    char getUserInput();
+    char getUserInput(int totalOptions);
     char promptBoardMenu();
     void drawBoard();
     void loadBlinkerBoard();
@@ -17,6 +17,8 @@ private:
     void generateNextGen();
     void autoNextGen();
     void exitApplication();
+    void loadBoard();
+    void saveBoard();
 };
 
 #endif //GAME_OF_LIFE_APPLICATION_H
