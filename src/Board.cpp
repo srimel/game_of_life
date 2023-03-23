@@ -288,7 +288,6 @@ void Board::autoNextGen() {
 }
 
 bool Board::isZero() {
-    int result = 0;
     for(int i = 0; i < ROW; i++) {
         for(int j = 0; j < COL; j++) {
            if(board[i][j].isAlive())
