@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "Utility.h"
 #include <iostream>
 
 using std::cout;
@@ -10,7 +11,7 @@ void Application::runApplication()
     char resp;
     do {
         bool check;
-        clearScreen();
+        Utility::clearScreen();
         do {
             _board.printBoard();
             cout << "Testing Board Setup for Conway's Game of Life" << endl;
@@ -22,7 +23,7 @@ void Application::runApplication()
                 check = false;
             else
                 check = true;
-            clearScreen();
+            Utility::clearScreen();
         } while (!check);
 
         switch (resp) {
@@ -58,9 +59,4 @@ void Application::runApplication()
     }while(resp != '0');
 }
 
-void Application::clearScreen() {
-    for(int i = 0; i < 50; ++i) {
-        cout <<'\n';
-    }
-}
 
