@@ -8,6 +8,8 @@ public:
 
 private:
     Board _board;
+
+    char drawInterface();
 };
 
 #endif //GAME_OF_LIFE_APPLICATION_H
