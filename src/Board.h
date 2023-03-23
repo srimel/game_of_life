@@ -20,11 +20,11 @@ public:
     void setupBoard();
     void draw();
     void printBoard();
-    bool loadBoard(std::string fileName);
-    bool loadConfig(std::string fileName);
-    bool saveBoard(std::string fileName);
+    bool loadBoard(const std::string& fileName);
+    bool loadConfig(const std::string& fileName);
+    bool saveBoard(const std::string& fileName);
     bool isZero();
-    bool operator==(Cell **);
+    bool operator==(Cell **) const;
 
 private:
     Cell ** board;

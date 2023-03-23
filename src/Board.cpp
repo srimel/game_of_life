@@ -72,7 +72,7 @@ void Board::printBoard() {
 }
 
 void Board::printHorizontalLine() const {
-    cout  <<"   "; // offest space accounts for numbering of each row.
+    cout  <<"   "; // offset space accounts for numbering of each row.
 	for(int q {0}; q < ((col * 4) + 1); q++) {
 		cout <<'-';
 	}
@@ -105,8 +105,8 @@ void Board::setupBoard() {
 }
 
 // Able to load special configuration files where each line in external file is a 2-pair tuple
-// indicating row and column position separated by a comma and each tuple sepated by a newline.
-bool Board::loadConfig(std::string fileName) {
+// indicating row and column position separated by a comma and each tuple separated by a newline.
+bool Board::loadConfig(const std::string& fileName) {
     std::ifstream fin;
     fin.open(fileName);
     if(!fin) {
@@ -130,7 +130,7 @@ bool Board::loadConfig(std::string fileName) {
     }
 }
 
-bool Board::saveBoard(std::string fileName) {
+bool Board::saveBoard(const std::string& fileName) {
     std::ofstream fout;
     fout.open(fileName);
     if(!fout) {
@@ -149,7 +149,7 @@ bool Board::saveBoard(std::string fileName) {
     }
 }
 
-bool Board::loadBoard(std::string fileName) {
+bool Board::loadBoard(const std::string& fileName) {
     std::ifstream fin;
     fin.open(fileName);
     if(!fin) {
@@ -299,11 +299,11 @@ bool Board::isZero() {
 }
 
 // TODO: use this for stopping auto generate when board doesn't change on update
-bool Board::operator==(Cell ** other_board) {
+bool Board::operator==(Cell ** other_board) const {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
             // TODO: overload != operator for Cell class
-            //if (board[i][j] != other_board[i][j]) { return false; }
+            // if (board[i][j] != other_board[i][j]) { return false; }
         };
     }
     return false;
