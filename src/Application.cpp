@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Utility.h"
+#include <dirent.h>
 #include <iostream>
 
 using std::cout;
@@ -88,11 +89,26 @@ void Application::loadBlinkerBoard() {
 }
 
 void Application::loadBoard() {
-    std::string response;
-    cout << "Enter a board to load: ";
-    getline(cin, response);
-    if (!_board.loadBoard(response)) {
-        std::cerr << response << " not loaded" << endl;
+    DIR* dir;
+    struct dirent* ent;
+    std::string fileName;
+    std::string directory = "../boards";
+    dir = opendir(directory.c_str());
+    if(dir != nullptr) {
+        cout << "Saved Boards: \n" << endl;
+        while((ent = readdir(dir)) != nullptr) {
+            if(ent->d_name[0] != '.') {
+                cout << ent->d_name <<endl;
+            }
+        }
+        closedir(dir);
+        cout << "\n\nEnter a board to load: ";
+        getline(cin, fileName);
+        if (!_board.loadBoard(fileName)) {
+            std::cerr << fileName << " not loaded" << endl;
+        }
+    } else {
+        std::cerr << "Could not open directory: " << directory << endl;
     }
 }
 
