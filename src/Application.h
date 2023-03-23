@@ -9,7 +9,9 @@ public:
 private:
     Board _board;
 
-    char drawInterface();
+    char getUserInput();
+
+    char promptBoardMenu();
 };
 
 #endif //GAME_OF_LIFE_APPLICATION_H

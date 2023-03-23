@@ -10,7 +10,7 @@ void Application::runApplication()
 {
     char resp;
     do {
-        resp = drawInterface();
+        resp = getUserInput();
         switch (resp) {
             case '0':
                 cout << "\n\nGoodbye!\n" << endl;
@@ -42,23 +42,28 @@ void Application::runApplication()
     }while(resp != '0');
 }
 
-char Application::drawInterface() {
+char Application::getUserInput() {
     char resp;
-    Utility::clearScreen();
     bool check;
+    Utility::clearScreen();
     do {
-        _board.printBoard();
-        cout << "Testing Board Setup for Conway's Game of Life" << endl;
-        cout << "Menu Options:\n" << "[1] Draw [2] Load Blinker+ [3] Reset [4] Next [5] Auto-Run [0] Exit\n";
-        cout << ">>> ";
-        cin >> resp;
-        cin.ignore(100, '\n');
+        resp = promptBoardMenu();
         if (resp < '0' || resp > '5')
             check = false;
         else
             check = true;
         Utility::clearScreen();
     } while (!check);
+    return resp;
+}
+
+char Application::promptBoardMenu() {
+    char resp;
+    _board.printBoard();
+    cout << "Menu Options:\n" << "[1] Draw [2] Load Blinker+ [3] Reset [4] Next [5] Auto-Run [0] Exit\n";
+    cout << ">>> ";
+    cin >> resp;
+    cin.ignore(100, '\n');
     return resp;
 }
 
