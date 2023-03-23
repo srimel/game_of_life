@@ -5,7 +5,6 @@
 class Application {
 public:
     void runApplication();
-    static void clearScreen();
 
 private:
     Board _board;

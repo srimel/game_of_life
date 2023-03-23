@@ -1,8 +1,8 @@
 #include <unistd.h>
 #include <iostream>
 #include "Board.h"
+#include "Utility.h"
 #include "Cell.h"
-#include "Application.h"
 
 using std::cout;
 using std::endl;
@@ -82,7 +82,7 @@ void Board::printHorizontalLine() const {
 void Board::setupBoard() {
     char response = 'n';
     int x = 0, y = 0;
-    Application::clearScreen();
+    Utility::clearScreen();
     do {
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
         printBoard();
@@ -92,12 +92,12 @@ void Board::setupBoard() {
         cin >> y;
         setState(x,y,true);
         cin.ignore(100, '\n');
-        Application::clearScreen();
+        Utility::clearScreen();
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
         printBoard();
         cout <<"Would you like to enter another cell? (y/n): ";
         cin >> response;
-        Application::clearScreen();
+        Utility::clearScreen();
     }while( tolower(response) != 'n');
     cout <<"Initial State of Board:\n" <<endl;
     printBoard();
@@ -282,7 +282,7 @@ void Board::autoNextGen() {
         nextGen();
         printBoard();
         usleep(500000); // need micro-sec?
-        Application::clearScreen();
+        Utility::clearScreen();
     }
 }
 
