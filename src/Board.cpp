@@ -150,7 +150,8 @@ bool Board::saveBoard(const std::string& fileName) {
 
 bool Board::loadBoard(const std::string& fileName) {
     std::ifstream fin;
-    fin.open(fileName);
+    std::string path = "../boards/" + fileName;
+    fin.open(path);
     if(!fin) {
         std::cerr <<"Error opening file!\n";
         return false;

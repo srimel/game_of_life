@@ -14,6 +14,7 @@ void Application::runApplication()
             &Application::exitApplication,
             &Application::drawBoard,
             &Application::loadBlinkerBoard,
+            &Application::loadBoard,
             &Application::resetBoard,
             &Application::generateNextGen,
             &Application::autoNextGen
@@ -22,7 +23,7 @@ void Application::runApplication()
     int totalMenuOptions = sizeof(menuFunctions) / sizeof(menuFunctions[0]);
 
     do {
-        resp = getUserInput();
+        resp = getUserInput(totalMenuOptions);
         int index = resp - '0'; // Convert char to integer index
         if (index >= 0 && index <= totalMenuOptions && menuFunctions[index]) {
             (this->*menuFunctions[index])();
@@ -32,13 +33,14 @@ void Application::runApplication()
     }while(resp != '0');
 }
 
-char Application::getUserInput() {
+char Application::getUserInput(int totalOptions) {
     char resp;
+    char optionLimit = '0' + (totalOptions - 1);
     bool check;
     Utility::clearScreen();
     do {
         resp = promptBoardMenu();
-        if (resp < '0' || resp > '5')
+        if (resp < '0' || resp > optionLimit)
             check = false;
         else
             check = true;
@@ -49,8 +51,22 @@ char Application::getUserInput() {
 
 char Application::promptBoardMenu() {
     char resp;
+    std::string options[] {
+        "Exit",
+        "Draw",
+        "Load Blinker+",
+        "Load Board",
+        "Reset",
+        "Next",
+        "Auto-Run"
+    };
+    int optionsCount = sizeof(options) / sizeof(options[0]);
     _board.printBoard();
-    cout << "Menu Options:\n" << "[1] Draw [2] Load Blinker+ [3] Reset [4] Next [5] Auto-Run [0] Exit\n";
+    cout << "Menu Options:\n";
+    for (int i = 1; i < optionsCount; i++) {
+        cout << "[" << i << "] " << options[i] << " ";
+    }
+    cout << "[0] " << options[0] <<endl;
     cout << ">>> ";
     cin >> resp;
     cin.ignore(100, '\n');
@@ -69,6 +85,16 @@ void Application::loadBlinkerBoard() {
     }
 }
 
+void Application::loadBoard() {
+    std::string response;
+    cout << "Enter a board to load: ";
+    cin >> response;
+    cin.ignore(100, '\n');
+    if (!_board.loadBoard(response)) {
+        std::cerr << response << " not loaded" << endl;
+    }
+}
+
 void Application::resetBoard() {
     _board.reset();
 }
@@ -78,7 +104,7 @@ void Application::generateNextGen() {
 }
 
 void Application::autoNextGen() {
-    _board.autoNextGen(); // will run 30 times (hardcoded)
+    _board.autoNextGen();
 }
 
 void Application::exitApplication() {
