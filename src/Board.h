@@ -5,7 +5,6 @@
 #include <fstream>
 #include "Cell.h"
 
-// Default size of game board
 #define ROW 10
 #define COL 20
 

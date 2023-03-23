@@ -121,7 +121,6 @@ bool Board::loadConfig(const std::string& fileName) {
             fin.ignore(100,',');
             fin >> y;
             fin.ignore(100,'\n');
-            cout <<"X: " <<x <<" Y: " <<y <<endl;
             setState(x, y, true);
         }
         fin.close();
@@ -297,13 +296,13 @@ bool Board::isZero() {
     return true;
 }
 
-// TODO: use this for stopping auto generate when board doesn't change on update
 bool Board::operator==(Cell ** other_board) const {
     for (int i = 0; i < row; i++) {
         for (int j = 0; j < col; j++) {
-            // TODO: overload != operator for Cell class
-            // if (board[i][j] != other_board[i][j]) { return false; }
+            if (board[i][j].isAlive() != other_board[i][j].isAlive()) {
+                return false;
+            }
         };
     }
-    return false;
+    return true;
 }
