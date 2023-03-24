@@ -202,9 +202,15 @@ void Board::reset() {
     }
 }
 
-void Board::nextGen() {
+bool Board::nextGen() {
     // board containing next generation
-    Cell ** hold = getNextGen();
+    Cell ** nextBoard = getNextGen();
+
+    // exit function if there is no changes between generations
+    if ((*this) == nextBoard) {
+        return false;
+    }
+
     // delete current board
     for(int i {0}; i < row; ++i) {
         delete [] board[i];
@@ -212,8 +218,9 @@ void Board::nextGen() {
     delete [] board;
 
     // update this board
-    this->board = hold;
+    this->board = nextBoard;
     updateNeighbors();
+    return true;
 }
 
 Cell ** Board::getNextGen() {
@@ -279,11 +286,12 @@ void Board::updateNeighbors() {
 }
 
 void Board::autoNextGen() {
-    for(int i {0}; !isZero(); i++) {
+    bool success = true;
+    for(int i = 0; !isZero() && success; i++) {
         cout << "Generation: " << i+1 << endl;
-        nextGen();
+        success = nextGen();
         printBoard();
-        usleep(500000); // need micro-sec?
+        usleep(200000); // need micro-sec?
         Utility::clearScreen();
     }
 }
