@@ -29,7 +29,7 @@ private:
     Cell ** board;
     int row, col;
     void printHorizontalLine() const;
-    void setState(int row, int col, bool x);
+    void setState(int row, int col);
     void printColNum() const;
     void updateNeighbors();
     Cell ** getNextGen();
