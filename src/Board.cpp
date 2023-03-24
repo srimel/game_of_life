@@ -34,12 +34,16 @@ Board::~Board() {
 	delete [] board;
 }
 
-void Board::setState(int r, int c, bool x) {
+void Board::setState(int r, int c) {
     if(r >= row || c >= col) {
         cout <<"Error: Out of array bounds\n";
         return;
     }
-	board[r][c].setLife(x);
+    if(board[r][c].isAlive()) {
+        board[r][c].setLife(false);
+    } else {
+        board[r][c].setLife(true);
+    }
 }
 
 void Board::printColNum() const {
@@ -86,11 +90,11 @@ void Board::setupBoard() {
     do {
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
         printBoard();
-        cout <<"Enter coordinates of a cell you want to birth (e.g. row <space> column <enter>) " <<endl;
+        cout <<"Enter coordinates of a cell you want to birth (e.g. column <space> row <enter>) " <<endl;
         cout <<">>> ";
         cin >> x;
         cin >> y;
-        setState(x,y,true);
+        setState(y,x);
         cin.ignore(100, '\n');
         Utility::clearScreen();
         cout <<"Let's set up the board for Conway's Game of Life!\n" <<endl;
@@ -121,7 +125,7 @@ bool Board::loadConfig(const std::string& fileName) {
             fin.ignore(100,',');
             fin >> y;
             fin.ignore(100,'\n');
-            setState(x, y, true);
+            setState(y, x);
         }
         fin.close();
         updateNeighbors();
