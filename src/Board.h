@@ -14,7 +14,7 @@ public:
     Board(const Board & src);
     ~Board();
     void reset();
-    void nextGen();
+    bool nextGen();
     void autoNextGen();
     void setupBoard();
     void draw();
